@@ -97,7 +97,7 @@ class Member {
     public function logout(){
         session_start();
         session_destroy();
-        die('<script>self.location.href="../member/index.php"</script>');
+        die('<script>self.location.href="/index.php"</script>');
     }
 
     // 회원 정보 가져오기
@@ -105,6 +105,16 @@ class Member {
         $sql = "SELECT * FROM member WHERE id=:id";
         $stmt = $this->conn->prepare($sql);                
         $stmt ->bindParam(":id", $id);
+        $stmt ->setFetchMode(PDO::FETCH_ASSOC); // 데이터베이스에서 레코드(DB의 테이블에서 하나의 행)를 가져올 때 사용할 기본 페치 모드설정   // PDO::FETCH_ASSOC는 연관 배열 형태(키는 열 이름으로 됨)로 반환
+        $stmt ->execute();
+        return $stmt->fetch(); //데이터베이스의 행을 배열로 반환
+    }
+
+    // 회원 정보 가져오기2
+    public function getInfoFormIdx($idx){
+        $sql = "SELECT * FROM member WHERE idx=:idx";
+        $stmt = $this->conn->prepare($sql);                
+        $stmt ->bindParam(":idx", $idx);
         $stmt ->setFetchMode(PDO::FETCH_ASSOC); // 데이터베이스에서 레코드(DB의 테이블에서 하나의 행)를 가져올 때 사용할 기본 페치 모드설정   // PDO::FETCH_ASSOC는 연관 배열 형태(키는 열 이름으로 됨)로 반환
         $stmt ->execute();
         return $stmt->fetch(); //데이터베이스의 행을 배열로 반환
@@ -181,4 +191,13 @@ class Member {
         return $row["cnt"];
     }
 
+    // 회원삭제
+    public function member_del($idx){
+        $sql = "DELETE * FROM member WHERE idx=:idx";
+        $stmt = $this->conn->prepare($sql);                
+        $stmt ->bindParam(":idx", $idx);
+        $stmt ->setFetchMode(PDO::FETCH_ASSOC); // 데이터베이스에서 레코드(DB의 테이블에서 하나의 행)를 가져올 때 사용할 기본 페치 모드설정   // PDO::FETCH_ASSOC는 연관 배열 형태(키는 열 이름으로 됨)로 반환
+        $stmt ->execute();
+        return $stmt->fetch(); //데이터베이스의 행을 배열로 반환
+    }
 }

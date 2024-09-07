@@ -1,0 +1,110 @@
+{
+	// Place your GLOBAL snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+
+	"Print to DATE": {
+		"prefix": "ccc",
+		"body": [
+			"//[CYJ:$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE] $1"
+		],
+		"description": "Log output to DATE"
+	},
+	
+	"Print to console": {
+		"prefix": "clog",
+		"body": [
+			"console.log('$1');"
+		],
+		"description": "Log output to console"
+	},
+
+	"Print to iframe": {
+		"prefix": "_iframe",
+		"body": [
+			"<iframe name=\"$1\" src=\"\" width=\"\" height=\"\" scrolling=\"no\" frameborder=\"0\"></iframe>;"
+		],
+		"description": "Log output to iframe"
+	},
+
+	"Print to Table": {
+		"prefix": "_table",
+		"body": [
+			"<table width=100% border=0 cellspacing=0 cellpadding=0>",
+			"	<tr>",
+			"		<td>$1</td>",
+			"	</tr>",
+			"</table>"
+		],
+		"description": "Log output to Table"
+	},
+
+	
+  
+	"Print to REMOTE_ADDR": {
+	  "prefix": "myad",
+	  "body": [
+		"if (getenv('REMOTE_ADDR') == '61.252.140.120') {",
+		"\t	highlight_string(\"<?php data = \" . var_export($1, true) . \"; ?>\");",
+		"\t	echo \"====== ====== ======= ====== <br /> \";",
+		"\t	exit;",
+		"}"
+	  ],
+	  "description": "내 아이피에서는~"
+	},
+  
+	"Print to PHP_FORM": {
+	  "prefix": "_php",
+	  "body": [
+		"<?php",
+		"/**",
+		"*****************************************************************",
+		"* 작성일: ",
+		"* 작성자: ",
+		"* 설  명: ",
+		"*****************************************************************",
+		"**/",
+  
+		"$$DB = &WebApp::singleton('DB');",
+  
+		"switch ($$REQUEST_METHOD) {",
+		"\t  case 'GET':",
+		"\t\t    $1",
+		"\t    break;",
+		"\t  case 'POST':",
+		"\t\t    $2",
+		"\t    break;",
+		"}",
+  
+		"?>"
+	  ],
+	  "description": "php standard form"
+	},
+	
+	"Print to REMOTE_ADDR": {
+		"prefix": "zzz",
+		"body": [
+		  "if (getenv('REMOTE_ADDR') == '180.233.211.239') {",
+		  "\t	highlight_string(\"<?php data = \" . var_export($1, true) . \"; ?>\");",
+		  "\t	echo \"====== ====== ======= ====== <br /> \";",
+		  "\t	exit;",
+		  "}"
+		],
+		"description": "내 아이피에서는~"
+	  },
+	
+}

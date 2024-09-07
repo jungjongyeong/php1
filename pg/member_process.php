@@ -3,7 +3,7 @@
     include '../inc/member.php';
 
     $mem = new Member($db);
-
+    $idx = (isset($_POST['idx']) && $_POST['idx'] != '') ? $_POST['idx'] : '';
     $id = (isset($_POST['id']) && $_POST['id'] != '') ? $_POST['id'] : '';
     $email = (isset($_POST['email']) && $_POST['email'] != '') ? $_POST['email'] : '';
     $password = (isset($_POST['password']) && $_POST['password'] != '') ? $_POST['password'] : '';
@@ -89,7 +89,8 @@
         }
         
         $arr = [
-            'id' => $_SESSION['see_id'],
+            'idx' => $idx,
+            'id' => $id,
             'email' => $email,
             'password' => $password,
             'name' => $name,
@@ -97,6 +98,20 @@
             'addr1' => $addr1,
             'addr2' => $addr2,
             'photo' => $old_photo,
+        ];
+
+        $mem->edit($arr);
+
+        echo "
+        <script>
+            self.location.href='../index.php'
+        </script>
+        ";
+
+    }else if($mode == 'delete'){
+        
+        $arr = [
+            'idx' => $idx,
         ];
 
         $mem->edit($arr);

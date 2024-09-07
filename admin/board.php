@@ -1,9 +1,9 @@
 <?php
 
 $g_title = '네카라쿠배';
-$js_array = ['js/member.js'];
+$js_array = ['js/board.js'];
 
-$menu_code = 'member';
+$menu_code = 'board';
 
     include '../inc/dbconfig.php';
     include '../inc/lib.php';
@@ -16,7 +16,7 @@ $menu_code = 'member';
 
     $mem = new Member($db);
 
-    $total = $mem->total();
+    $total = $mem->board_total();
     $limit = 5;
     $page_limit = 5;
 
@@ -26,31 +26,29 @@ $menu_code = 'member';
 
     $param = '';
     
-    $memArr = $mem->list($page, $limit, $paramArr);
+    $memArr = $mem->board_list($page, $limit, $paramArr);
 
 ?>
 <main class="w-100 mx-auto border rounded-5 p-5" style="height:calc(100vh - 257px);">
     <div class="container">
-        <h3>회원관리</h3>
+        <h3>게시판 관리</h3>
     </div>
 
     <table class="table table-border" style="">
         <tr>
             <th>번호</th>
-            <th>아이디</th>
-            <th>이름</th>
-            <th>이메일</th>
+            <th>타입</th>
+            <th>게시판 이름</th>
             <th>등록일시</th>
-            <th>관리</th>
+            <th colspan="2" style="text-align:center">관리</th>
         </tr>
         <?php 
             foreach($memArr as $item){
         ?>
             <tr>
                 <td><?= $item["idx"]?></td>
-                <td><?= $item["id"]?></td>
+                <td><?= $item["btype"]?></td>
                 <td><?= $item["name"]?></td>
-                <td><?= $item["email"]?></td>
                 <td><?= $item["create_at"]?></td>
                 <td><button class="btn btn-primary btn-sm mem_edit_btn" data-idx="<?= $item["idx"] ?>">수정</button></td>
                 <td><button class="btn btn-danger btn-sm mem_del_btn" data-idx="<?= $item["idx"] ?>">삭제</button></td>
@@ -63,10 +61,8 @@ $menu_code = 'member';
 
 </main>
 <div class="container mt-3 d-flex gap-2 w-50">
-    <select class="form-select w-25" name="sn" id="sn">
-        <option value="1">이름</option>
-        <option value="2">아이디로</option>
-        <option value="3">이메일</option>
+    <select class="form-select w-50" name="sn" id="sn">
+        <option value="1">게시판 명</option>
     </select>
     <input type="text" class="form-contol w-25" id="sf" name="sf">
     <button class="btn btn-primary" id="btn_search">검색</button>
@@ -76,8 +72,8 @@ $menu_code = 'member';
             echo my_pagination($total, $limit, $page_limit, $page, $param);
         ?>
 
-        <button class="btn btn-primary" id="btn_excel">
-            엑셀로 저장
+        <button class="btn btn-primary" id="btn_board_input">
+            게시판 생성
         </button>
     </div>
 
